@@ -1,0 +1,9 @@
+def binarize(dec):
+    binr=[]
+    rmd=dec
+    while rmd!=0:
+        binr.insert(0,dec%2)
+        rmd=rmd/2
+    print (join(binr))
+
+binarize(50)
