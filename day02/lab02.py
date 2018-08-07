@@ -5,15 +5,11 @@ class Clock(object):
         self.minutes = minutes
         self.hour = hour
 
-    @classmethod
-    def at(cls, hour, minutes=0):
-        return cls(hour, minutes)
-
     ## Print the time
     def __str__(self):
         return 'It is %d h %d m'%(self.hour,self.minutes)
     ## Add time
-    ## Don't return anythhing
+    ## Don't return anything
     def __add__(self,minutes):
         if self.minutes+minutes>59:
             self.minutes=(self.minutes+minutes)%60
