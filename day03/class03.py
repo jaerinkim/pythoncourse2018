@@ -12,16 +12,16 @@ else
 
 ## Wrong indentation.. ipython helps me here.
 for i in range(1,5):
-  print i
+    print i
 
 ## colors help, too
 x = 0
-While x < 5:
+while x < 5:
     x += 1
 print x
 
 ## brackets and parentheses
-print (10*2) + (5*3))
+print (10*2) + (5*3)
 
 
 
@@ -258,8 +258,9 @@ for n in range(2, 10):
     for x in range(2, n):
         if n % x == 0:
             print "%d equals %d * %d" % (n, x, n//x)
-        else:
-            print "%d is a prime number" % n
+            break
+    else:
+        print "%d is a prime number" % n
 
 ## How do we fix this loop?
 ## We have 2 semantic errors:
