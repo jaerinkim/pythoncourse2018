@@ -3,13 +3,12 @@
 ## When done, run the test file in the terminal and see your results.
 def count_vowels(word):
     count=0
-    try:
-        print ("Your input: "+word)
-    except TypeError:
-        print ("This is not a string!")
-    except ValueError:
-        print ("Put in only one string")
+    if type(word)!=str:
+        raise TypeError, "This is not a string!"
     else:
         for i in range(len(word)):
             count+=word[i] in ["a","e","i","o","u"]
-        return count
+            return count
+
+count_vowels("abc")
+count_vowels(5)
