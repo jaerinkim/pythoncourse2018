@@ -34,4 +34,12 @@ for j in range(0,len(pages)):
         titl=pages[j].find_all("article",{"class":"node node-petition node-promoted node-teaser node-"+oddid})[i/2].find("a").get_text()
         indtitl.append(titl)
 
+dates=[]
+for i in range(len(indpages)):
+    print "Adding dates for petition #"+str(i+1)
+    page=BeautifulSoup(urllib2.urlopen("https://petitions.whitehouse.gov/"+indpages[i]).read())
+    datetexton=page.find_all("h4")[0].get_text().find(" on ")+4
+    dates.append(page.find_all("h4")[0].get_text()[datetexton:])
+
+
 
