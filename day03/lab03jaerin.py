@@ -66,6 +66,11 @@ def piglatin(txt):
             piglfull.append("".join(pigl))
         return(" ".join(piglfull))
 
+## note: not to do the work twice:
+## except TypeError as err:
+## print err
+
+
 ## Try/catch is more common when using
 ## someone else's code, scraping, etc. -----------------------------------
 

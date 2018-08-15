@@ -5,7 +5,7 @@
 ## https://console.developers.google.com/apis/credentials?project=_
 ## need maps and distance APIs enabled
 import imp
-imported_items = imp.load_source('pythoncourse2018-prep', '../../pythoncourse2018-prep/day05/erinkeys/googlekeys.py')
+imported_items = imp.load_source('~/code/pycourse/pythoncourse2018/','~/code/googlekeys.py')
 gmaps = imported_items.gmaps
 
 whitehouse = '1600 Pennsylvania Avenue, Washington, DC'
