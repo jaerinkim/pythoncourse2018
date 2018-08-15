@@ -19,7 +19,8 @@ while endpage==False:
 
 indpages=[]
 indtitl=[]
-
+indissues=[]
+nentry=0
 for j in range(0,len(pages)):
     if j==len(pages)-1:
         npetitions=lastpagepetitions
@@ -29,10 +30,19 @@ for j in range(0,len(pages)):
         oddid="even"
         if i%2==0:
             oddid="odd"
+        nentry+=1
+        print "Working on entry #"+str(nentry)+":"
         addr=pages[j].find_all("article",{"class":"node node-petition node-promoted node-teaser node-"+oddid})[i/2].find("a").attrs["href"]
         indpages.append(addr)
+        print "Address"
         titl=pages[j].find_all("article",{"class":"node node-petition node-promoted node-teaser node-"+oddid})[i/2].find("a").get_text()
         indtitl.append(titl)
+        print "Petition Title"
+        issues=pages[j].find_all("article",{"class":"node node-petition node-promoted node-teaser node-"+oddid})[i/2].find_all("h6")
+        indissues.append([])
+        for k in range(len(issues)):
+            indissues[j*20+i].append(issues[k].get_text())
+        print "Issue Categories"
 
 dates=[]
 for i in range(len(indpages)):
