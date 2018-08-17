@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import urllib2
-import csv
+import unicodecsv as csv
 
 mainpage="https://petitions.whitehouse.gov/petitions?page="
 pages=[]
@@ -20,8 +20,9 @@ while endpage==False:
 indpages=[]
 indtitl=[]
 indissues=[]
+signs=[]
 nentry=0
-for j in range(0,len(pages)):
+for j in range(1,len(pages)):
     if j==len(pages)-1:
         npetitions=lastpagepetitions
     else:
@@ -33,16 +34,21 @@ for j in range(0,len(pages)):
         nentry+=1
         print "Working on entry #"+str(nentry)+":"
         addr=pages[j].find_all("article",{"class":"node node-petition node-promoted node-teaser node-"+oddid})[i/2].find("a").attrs["href"]
+        #emptydictionary["indpags"] = adr
         indpages.append(addr)
         print "Address"
         titl=pages[j].find_all("article",{"class":"node node-petition node-promoted node-teaser node-"+oddid})[i/2].find("a").get_text()
+        #emptydictionary["indtitle"] = title
         indtitl.append(titl)
         print "Petition Title"
         issues=pages[j].find_all("article",{"class":"node node-petition node-promoted node-teaser node-"+oddid})[i/2].find_all("h6")
         indissues.append([])
         for k in range(len(issues)):
-            indissues[j*20+i].append(issues[k].get_text())
+            indissues[nentry-1].append(issues[k].get_text())
         print "Issue Categories"
+        signs.append(pages[j].find_all("span",{"class":"signatures-number"})[i].get_text())
+        print "Number of Signatures"
+
 
 dates=[]
 for i in range(len(indpages)):
@@ -51,5 +57,14 @@ for i in range(len(indpages)):
     datetexton=page.find_all("h4")[0].get_text().find(" on ")+4
     dates.append(page.find_all("h4")[0].get_text()[datetexton:])
 
+print "Writing as .csv file"
 
+zipped=zip(indtitl,dates,indissues,signs)
 
+with open ('jaerin.petitions.csv','wb') as f:
+    write=csv.writer(f)
+    write.writerow(["Title","Date","Issue Category","Signatures"])
+    for i in range(len(indpages)):
+        write.writerow(zipped[i])
+
+print "Finished. The .csv file is in your working directory."
