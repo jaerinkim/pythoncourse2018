@@ -1,7 +1,7 @@
 # pip install nltk
 
 import nltk
-#nltk.download('names')
+nltk.download('names')
 from nltk.corpus import names
 import random
 

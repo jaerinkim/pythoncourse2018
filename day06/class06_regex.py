@@ -109,8 +109,8 @@ re.split(r'(\.)', alltext) ## () splits and keeps separator
 keyword = re.compile(r"America[a-z]*")
 
 ## search file for keyword in line by line version
-for line in text:
-  if keyword.search(line):
+for line in obama:
+  if findthe.search(line):
     print line 
 
 
