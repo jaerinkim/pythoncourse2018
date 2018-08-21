@@ -41,8 +41,16 @@ for i in range(16):
         if i%16!=15:
             ring=makeLink(ring,i*16+j,i*16+j+16)
 
+#Alternatively,
 
+altring={}
+for i in range(255):
+    if i%16!=15:
+        altring=makeLink(altring,i,i+1)
+    if i/16!=15:
+        altring=makeLink(altring,i,i+16)
 
+ring==altring
 
 ##  Social Network
 class Actor(object):
