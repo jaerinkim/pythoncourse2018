@@ -32,11 +32,14 @@ print sum([len(ring[node]) for node in ring.keys()])/2
 ## TODO: create a square graph with 256 nodes using the makeLink function
 ## TODO: define a function countEdges
 
+ring={}
 
-
-
-
-
+for i in range(16):
+    for j in range(16):
+        if j%16!=15:
+            ring=makeLink(ring,i*16+j,i*16+j+1)
+        if i%16!=15:
+            ring=makeLink(ring,i*16+j,i*16+j+16)
 
 
 
