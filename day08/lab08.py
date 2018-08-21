@@ -52,6 +52,14 @@ for i in range(255):
 
 ring==altring
 
+def countEdges(obj):
+    edges=0
+    for i in obj:
+        if len(obj[i])<4:
+            edges+=1
+    return(edges)
+    
+
 ##  Social Network
 class Actor(object):
   def __init__(self, name):
