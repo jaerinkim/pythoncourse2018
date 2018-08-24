@@ -109,15 +109,29 @@ session.commit()
 
 # Some example querying 
 for town in session.query(Town).order_by(Town.id):
-  print town.name, town.population
+  print town.id, town.name, town.population
 
 
 # TODO: 
 # 1. Display, by department, the cities having
 #    more than 50,000 inhabitants.
+for dep,i in enumerate(session.query(Department)):
+    print "Department ", str(dep+1), ", Towns with Population more than 50,000"
+    exists=False
+    for j in i.towns:
+        if j.population>50000:
+            print j.name, ":", j.population
+            exists=True
+    if exists==False:
+        print "No Towns with population more than 50,000"
+        print "\n"
+
+
 # 2. Display the total number of inhabitants
 #    per department
 
+for dep,i in enumerate(session.query(Department)):
+    print "Department ", str(dep+1), sum([j.population for j in i.towns])
 
 
 
