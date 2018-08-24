@@ -41,3 +41,55 @@ print shortersort(['a',5,1,3,'b'])
 print longersort(['b',3,1,5,'a'])
 test=['this',12,'is',3,'a',6,'test']
 shortersort(test)==longersort(test)
+
+import matplotlib.pyplot as plt
+import time
+import random
+
+# Defining a function drawing observations from a uniform distribution
+def ranun(trials):
+    return([random.uniform(-1,1) for i in range(trials)])
+# Defining a function calculating time taken to run sort functions
+def elapsed(trials):
+    shtime=[]
+    lntime=[]
+    srtime=[]
+    for i in range(trials):
+# For each loop, ranun is called to create a list of size i
+        tester=ranun(i)
+# Time is recorded just before running the function
+        ctime=time.time()
+        shortersort(tester)
+# The difference between time after running function and
+# the recorded one is appended in the respective lists,
+        shtime.append(time.time()-ctime)
+        ctime=time.time()
+# for longersort function,
+        longersort(tester)
+        lntime.append(time.time()-ctime)
+        ctime=time.time()
+# and the built-in sorted function.
+        sorted(tester)
+        srtime.append(time.time()-ctime)
+    return([shtime,lntime,srtime])
+# How much time do functions take for 600 trials?
+timetaken=elapsed(600)
+# Quite a while. Now we can plot the result.
+
+
+# Plotting how efficient the built-in sort function is
+plt.subplots_adjust(left = .13, right = .95, top = .9, bottom = .3)
+# 'timetaken' is a list of lists, each representing time taken
+# to perform shortersort, longersort, and sorted, respectively.
+plt.plot(range(1,601),timetaken[0])
+plt.plot(range(1,601),timetaken[1])
+plt.plot(range(1,601),timetaken[2])
+plt.legend(['shortersort', 'longersort','sorted'], loc = "upper left", prop = {"size":10})
+plt.ylabel("Time Elapsed (Seconds)")
+plt.xlabel("Number of Elements in the List")
+plt.title("How Inefficient It Is to Write Your Own Sort Function")
+txt = """
+Let's use 'sorted' function.
+"""
+plt.figtext(.5, .05, txt, fontsize = 10, ha = "center")
+plt.savefig('plot.pdf')
